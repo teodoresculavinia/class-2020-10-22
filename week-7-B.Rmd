@@ -26,12 +26,46 @@ The parameter $H$ is still the average number of hours of work reported by stude
 
 Review the Cardinal Virtues which serve as our guide for data science. Under Justice, is this model predictive or causal? What would the Preceptor Table look like? Write down the mathematical model we are using.
 
+```{r}
+fit_obj <- stan_glm(data = qscores, 
+                    hours ~ 1, 
+                    family = gaussian(), 
+                    refresh = 0)
+print(fit_obj)
+
+# The predicted median number of hours ($\mu$) that Harvard courses take in the
+# population is 6.2. MAD-SD is a measure of the spread of the distribution of
+# median. The variability in median reported hours in the population is 0.1 (so
+# the true population median could plausibly be anywhere between 6 and 6.4, +/-
+# 2 MAD_SD, with approximately 95% confidence). 
+# The standard deviation of the residuals of our model is 3.5. This is a measure
+# of the average variability in the reported hours in the population.
+
+```
+
 
 
 ## Scene 2
 
 **Prompt:** Create a plot of the posterior probability distribution for $H$. Interpret the plot. 
 
+```{r}
+
+fit_obj %>% 
+  as_tibble() %>% 
+  rename(mu = '(Intercept)') %>% 
+  ggplot(aes(x = mu)) +
+  geom_histogram(aes(y = after_stat(count/sum(count))),
+                 binwidth = 0.01, 
+                 color = "white", 
+                 fill = "lightblue") +
+  labs(title = "Posterior Distribution for Median Hours",
+       subtitle = "For Classes at Harvard",
+       x = "Median Hours",
+       y = "Probability") +
+  theme_classic()
+
+```
 
 
 
@@ -48,5 +82,12 @@ Define D as the number of hours difference between the workload of two randomly 
 What is your posterior probability distribution for D? 
 
 
+```{r}
+
+pp <- posterior_predict(fit_obj) %>%
+  as_tibble() %>%
+  mutate(across(everything(), as.numeric))
+
+```
 
 

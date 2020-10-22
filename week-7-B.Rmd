@@ -1,0 +1,52 @@
+---
+title: "Week 7, Day 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# We need the PPBDS.data package because it includes the qscores data which we
+# will use for this exercise. rstanarm is the package we use for constructing
+# Bayesian models. See The Primer for examples on its use. It is probably the
+# most popular model in R for doing so, although brms is also widely used.
+
+knitr::opts_chunk$set(echo = FALSE)
+library(PPBDS.data)
+library(rstanarm)
+library(tidyverse)
+```
+
+We have now learned two techniques for constructing a posterior probability distribution: building the $p(models, data)$ joint distribution by hand and using the bootstrap. Both are a bother, although the bootstrap is much easier and more flexible. Today, we will practice using `rstanarm::stan_glm()` for the same purpose.
+
+The parameter $H$ is still the average number of hours of work reported by students per course. 
+
+
+## Scene 1
+
+**Prompt:** Create an objected called `fit_obj` which uses `stan_glm()` to estimate a model which explains hours for courses. It still has two parameters: $H$ and $\sigma$. $H$ is the average hours for courses in the population. $\sigma$ is the variability (around the average) in reported hours in the population. Print the model out and write some bullet points which explain the meaning of each parameter you have just estimated.
+
+Review the Cardinal Virtues which serve as our guide for data science. Under Justice, is this model predictive or causal? What would the Preceptor Table look like? Write down the mathematical model we are using.
+
+
+
+## Scene 2
+
+**Prompt:** Create a plot of the posterior probability distribution for $H$. Interpret the plot. 
+
+
+
+
+## Scene 3
+
+**Prompt:** Use your model to answer the following questions: 
+
+What do the rows and columns mean in the matrix returned by `posterior_predict()` mean?
+
+
+What is the 90% confidence interval within which the difference should fall?  
+
+
+What is your posterior probability distribution for the number of hours difference between the workload of two randomly selected courses? 
+
+
+
+

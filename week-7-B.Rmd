@@ -42,10 +42,10 @@ Review the Cardinal Virtues which serve as our guide for data science. Under Jus
 What do the rows and columns mean in the matrix returned by `posterior_predict()` mean?
 
 
-What is the 90% confidence interval within which the difference should fall?  
+Define D as the number of hours difference between the workload of two randomly selected courses. What is the 90% confidence interval within which the difference should fall?  
 
 
-What is your posterior probability distribution for the number of hours difference between the workload of two randomly selected courses? 
+What is your posterior probability distribution for D? 
 
 
 
